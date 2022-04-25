@@ -12,7 +12,6 @@ export function Reserva() {
         document.title = "Reserva de Aulas"
         historial.push('/')
     }
-
     return (
 
         <div className='login'>

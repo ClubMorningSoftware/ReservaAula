@@ -12,29 +12,38 @@ export function Inicio() {
     const Registrarse = () => {
         historial.push('/registro')
     }
-
-    const IniciarSecion = () => {
-
+    const IniciarSeSion = () => {
         var usuario = refUsuario.current.value;
         var contraseña = refContraseña.current.value;
         if (usuario != "") {
             if (contraseña != "") {
-                if (usuario == "201801656" && contraseña == "123456") {
-                    document.title = usuario;
-                    console.log("Se Inicio Sesion Correctamente");
-                    toast.success('Inicio de secion correcta', { position: 'top-center' })
-                    historial.push('/reserva');
+                if (isNaN(usuario)== false){
+                    if (usuario == "201801656") {
+                    if (contraseña == "123456") {
+                        document.title = usuario;
+                        console.log("Se Inicio Sesion Correctamente");
+                        toast.success('INICIO DE SESION CORRECTAMENTE', { position: 'top-center' })
+                        historial.push('/reserva');
+                    } else {
+                        console.log("Contraseña incorrecta");
+                        toast.error("CONTRASEÑA INCORRECTA", { position: "top-center" })
+                    }
                 } else {
                     console.log("No Existe Usuario");
-                    toast.error("Cuenta no registrada", { position: "top-center" })
+                    toast.error("CUENTA NO REGISTRADA", { position: "top-center" })
                 }
+                }else{
+                    console.log("Codigo no valido");
+                    toast.error("CODIGO SIS INVALIDO", { position: "top-center" })
+                }
+                
             } else {
                 console.log("Contraseña No Introducida");
-                toast.error("Introducir contraseña", { position: "top-center" })
+                toast.error("INTRODUCIR CONTRASEÑA", { position: "top-center" })
             }
         } else {
             console.log("Codigo sis No Introducido");
-            toast.error("Introducir codigo sis", { position: "top-center" })
+            toast.error("INTRODUCIR CODIGO SIS", { position: "top-center" })
         }
     }
     return (
@@ -74,7 +83,7 @@ export function Inicio() {
                                 />
                             </div>
                             <div class="d-grid gap-2 mt-2">
-                                <button onClick={IniciarSecion} type="button" class="btn btn-info">ACCEDER</button>
+                                <button onClick={IniciarSeSion} type="button" class="btn btn-info">ACCEDER</button>
                                 <Toaster
                                     position="top-center"
                                     reverseOrder={false}

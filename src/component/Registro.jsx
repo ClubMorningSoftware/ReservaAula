@@ -3,7 +3,6 @@ import '../assets/css/App.css';
 import toast, { Toaster } from 'react-hot-toast';
 import { useHistory } from 'react-router-dom';
 
-
 export function Registro() {
     const historial = useHistory();
     const refCodigoSis = useRef(null);
@@ -12,6 +11,7 @@ export function Registro() {
     const refContraseña = useRef(null);
     const refRepetirContraseña = useRef(null);
     var existe = true;
+    var hay_numero = false
 
     const Registrarse = () => {
         var codigoSis = refCodigoSis.current.value;
@@ -24,71 +24,113 @@ export function Registro() {
                 if (codigoSis.length == 9) {
                     if (nombre != "") {
                         if (nombre.length > 2 && nombre.length < 31) {
-                            if (correo != "") {
-                                if (correo.indexOf('@') > 0) {
-                                    if (contraseña != "") {
-                                        if (contraseña.length > 4 && contraseña.length < 31) {
-                                            if (repetirContraseña != "") {
-                                                if (contraseña == repetirContraseña) {
-                                                    existeCuenta()
-                                                    if (!existe) {
-                                                        console.log("Registrado");
-                                                        document.title = codigoSis;
-                                                        toast.success('Registro Correcto')
-                                                        historial.push('/reserva');
+                            hayNumero(nombre)
+                            if (hay_numero == false) {
+                                if (correo != "") {
+                                    if (correo.indexOf('@') > 0) {
+                                        if (contraseña != "") {
+                                            if (contraseña.length > 4 && contraseña.length < 31) {
+                                                if (repetirContraseña != "") {
+                                                    if (contraseña == repetirContraseña) {
+                                                        existeCuenta()
+                                                        if (!existe) {
+                                                            console.log("Registrado");
+                                                            document.title = codigoSis;
+                                                            toast.success('REGISTRO EXITOSO')
+                                                            historial.push('/reserva');
+                                                        } else {
+                                                            console.log("Ya Existe Usuario");
+                                                            toast.error("LA CUENTA YA EXISTE", {
+                                                                position: "top-center"
+                                                            })
+                                                        }
                                                     } else {
-                                                        console.log("Ya Existe Usuario");
-                                                        toast.error("Cuenta ya registrada", {
-                                                            position: "top-center"
-                                                        })
+                                                        console.log("Contraseña no coinciden");
+                                                        toast.error("CONTRASEÑAS NO COINCIDEN", { position: "top-center" })
                                                     }
                                                 } else {
-                                                    console.log("Contraseña no coinciden");
-                                                    toast.error("Contraseñas no coinciden", { position: "top-center" })
+                                                    console.log("Repetir Contraseña No Introducida");
+                                                    toast.error("REPITA LA CONTRASEÑA", { position: "top-center" })
                                                 }
                                             } else {
-                                                console.log("Repetir Contraseña No Introducida");
-                                                toast.error("Repita la contraseña", { position: "top-center" })
+                                                console.log("Contraseña No Valida");
+                                                toast.error("CONTRASEÑA INVALIDA", { position: "top-center" })
                                             }
                                         } else {
-                                            console.log("Contraseña No Valida");
-                                            toast.error("Contraseña invalida", { position: "top-center" })
+                                            console.log("Contraseña No Introducida");
+                                            toast.error("INTRODUCIR CONTRASEÑA", { position: "top-center" })
                                         }
                                     } else {
-                                        console.log("Contraseña No Introducida");
-                                        toast.error("Introducir contraseña", { position: "top-center" })
+                                        console.log("Correo No valido");
+                                        toast.error("CORREO INVALIDO", { position: "top-center" })
                                     }
                                 } else {
-                                    console.log("Correo No valido");
-                                    toast.error("Correo no valido", { position: "top-center" })
+                                    console.log("Correo No Introducida");
+                                    toast.error("INTRODUCIR CORREO", { position: "top-center" })
                                 }
+
+
                             } else {
-                                console.log("Correo No Introducida");
-                                toast.error("Introducir correo", { position: "top-center" })
+                                hay_numero = false
+                                console.log("Nombre No Valido Hay Numeros");
+                                toast.error("NOMBRE NO VALIDO ", { position: "top-center" })
                             }
                         } else {
                             console.log("Nombre No Valido");
-                            toast.error("Nombre no valido", { position: "top-center" })
+                            toast.error("NOMBRE NO VALIDO", { position: "top-center" })
                         }
                     } else {
                         console.log("Nombre No Introducida");
-                        toast.error("Introducir Nombre", { position: "top-center" })
+                        toast.error("INTRODUCIR NOMBRE", { position: "top-center" })
                     }
                 } else {
                     console.log("Codigo Sis no admitido");
-                    toast.error("Codigo Sis no admitido", { position: "top-center" })
+                    toast.error("CODIGO SIS INVALIDO ", { position: "top-center" })
                 }
             } else {
                 console.log("Codigo Sis Tiene que ser numeros");
-                toast.error("Codigo Sis Tiene que ser numeros", { position: "top-center" })
+                toast.error("CODIGO SIS INVALIDO", { position: "top-center" })
             }
         } else {
             console.log("Codigo Sis No Introducida");
-            toast.error("Introducir codigo sis", { position: "top-center" })
+            toast.error("INTRODUCIR CODIGO SIS", { position: "top-center" })
         }
     }
     const existeCuenta = () => {
         existe = false;
+    }
+    const hayNumero = (nombre) => {
+        console.log(nombre)
+        if (nombre.indexOf('0') > 0) {
+            hay_numero = true
+        }
+        if (nombre.indexOf('1') > 0) {
+            hay_numero = true
+        }
+        if (nombre.indexOf('2') > 0) {
+            hay_numero = true
+        }
+        if (nombre.indexOf('3') > 0) {
+            hay_numero = true
+        }
+        if (nombre.indexOf('4') > 0) {
+            hay_numero = true
+        }
+        if (nombre.indexOf('5') > 0) {
+            hay_numero = true
+        }
+        if (nombre.indexOf('6') > 0) {
+            hay_numero = true
+        }
+        if (nombre.indexOf('7') > 0) {
+            hay_numero = true
+        }
+        if (nombre.indexOf('8') > 0) {
+            hay_numero = true
+        }
+        if (nombre.indexOf('9') > 0) {
+            hay_numero = true
+        }
     }
     return (
         <div className='login'>
