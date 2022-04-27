@@ -23,7 +23,7 @@ export function Reserva() {
                         </div>
                         <div className="card-body">
                             <div class="d-grid gap-2 mt-2">
-
+                                <button onClick={CerrarSesion} type="button" class="btn btn-info">Cerrar Sesion</button>
                             </div>
                         </div>
                     </div>
@@ -36,5 +36,5 @@ export function Reserva() {
         </div>
     )
 }/*
-<button onClick={CerrarSesion} type="button" class="btn btn-info">Cerrar Sesion</button>
+
 */

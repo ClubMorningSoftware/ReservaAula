@@ -148,7 +148,7 @@ export function Registro() {
                                 <input
                                     type="text"
                                     className="form-control"
-                                    placeholder="CODIGO SIS"
+                                    placeholder="Nombre de usuario"
                                     aria-label="Username"
                                     aria-describedby="basic-addon1"
                                     ref={refCodigoSis}

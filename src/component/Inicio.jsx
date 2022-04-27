@@ -62,7 +62,7 @@ export function Inicio() {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="CODIGO SIS"
+                                        placeholder="Nombre de usuario"
                                         name='codigoSisDocente'
                                         aria-label="Username"
                                         aria-describedby="basic-addon1"
