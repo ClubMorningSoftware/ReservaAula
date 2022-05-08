@@ -68,8 +68,6 @@ export function Registro() {
                                     console.log("Correo No Introducida");
                                     toast.error("INTRODUCIR CORREO", { position: "top-center" })
                                 }
-
-
                             } else {
                                 hay_numero = false
                                 console.log("Nombre No Valido Hay Numeros");
@@ -84,16 +82,16 @@ export function Registro() {
                         toast.error("INTRODUCIR NOMBRE", { position: "top-center" })
                     }
                 } else {
-                    console.log("Codigo Sis no admitido");
-                    toast.error("CODIGO SIS INVALIDO ", { position: "top-center" })
+                    console.log("Nombre usuario no admitido");
+                    toast.error("NOMBRE DE USUARIO INVALIDO ", { position: "top-center" })
                 }
             } else {
-                console.log("Codigo Sis Tiene que ser numeros");
-                toast.error("CODIGO SIS INVALIDO", { position: "top-center" })
+                console.log("Nombre usuario Tiene que ser numeros");
+                toast.error("NOMBRE DE USUARIO INVALIDO", { position: "top-center" })
             }
         } else {
-            console.log("Codigo Sis No Introducida");
-            toast.error("INTRODUCIR CODIGO SIS", { position: "top-center" })
+            console.log("Nombre Usuario No Introducida");
+            toast.error("INTRODUCIR NOMBRE DE USUARIO", { position: "top-center" })
         }
     }
     const existeCuenta = () => {

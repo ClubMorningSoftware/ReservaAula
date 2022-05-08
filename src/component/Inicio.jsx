@@ -33,8 +33,8 @@ export function Inicio() {
                         toast.error("CUENTA NO REGISTRADA", { position: "top-center" })
                     }
                 } else {
-                    console.log("Codigo no valido");
-                    toast.error("CODIGO SIS INVALIDO", { position: "top-center" })
+                    console.log("Nombre usuario no valido");
+                    toast.error("NOMBRE DE USUARIO INVALIDO", { position: "top-center" })
                 }
 
             } else {
@@ -43,7 +43,7 @@ export function Inicio() {
             }
         } else {
             console.log("Codigo sis No Introducido");
-            toast.error("INTRODUCIR CODIGO SIS", { position: "top-center" })
+            toast.error("INTRODUCIR NOMBRE DE USUARIO", { position: "top-center" })
         }
     }
     return (
@@ -52,6 +52,7 @@ export function Inicio() {
                     <div className="col-sm-4 offset-4 mt-5">
                         <div className="card pt-5">
                             <div className="card-header">
+                                
                                 <h3>👨🏻‍🏫 INICIAR SESION</h3>
                             </div>
                             <div className="card-body">
