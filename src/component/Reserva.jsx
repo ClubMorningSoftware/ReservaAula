@@ -28,13 +28,17 @@ export function Reserva() {
         toast.success("SESION CERRADA CON EXITO", { position: "top-center" })
     }
 
+    const exiteAula= (aula) =>{
+        return true;
+    }
+
     const EnviarSolicitud = () => {
         var carrera = refCarrera.current.value;
         var materia = refMateria.current.value;
         var grupo = refGrupo.current.value;
         var cantidadEstudiantes = refCantidadEstudiantes.current.value;
-        /*var aula = refAula.current.value;
-        var motivo = refMotivo.current.value;
+        var aula = refAula.current.value;
+        /*var motivo = refMotivo.current.value;
         var fecha = refFecha.current.value;
         var hora = refHora.current.value;
         var periodo = refPeriodo.current.value;
@@ -46,8 +50,13 @@ export function Reserva() {
                     if (grupo > 0 && grupo < 6) {
                         if ( cantidadEstudiantes!= "") {
                             if (cantidadEstudiantes > 0 && cantidadEstudiantes < 301) {
-                                console.log("Solicitud enviada");
+                                if (exiteAula(aula)){
+                                    console.log("Solicitud enviada");
                                 toast.success("SOLICITUD ENVIADA", { position: "top-center" })
+                                }else{
+                                    console.log("Aula no existe");
+                                toast.error("AULA INVALIDA", { position: "top-center" })
+                                }
                             } else {
                                 console.log("Cantidad Estudiantes Fuera Del Rango");
                                 toast.error("CANTIDAD ESTUDIANTES FUERA DEL RANGO", { position: "top-center" })
