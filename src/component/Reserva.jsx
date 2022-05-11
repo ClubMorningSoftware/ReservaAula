@@ -28,7 +28,7 @@ export function Reserva() {
         toast.success("SESION CERRADA CON EXITO", { position: "top-center" })
     }
 
-    const exiteAula= (aula) =>{
+    const exiteAula = (aula) => {
         return true;
     }
 
@@ -38,7 +38,7 @@ export function Reserva() {
         var grupo = refGrupo.current.value;
         var cantidadEstudiantes = refCantidadEstudiantes.current.value;
         var aula = refAula.current.value;
-        /*var motivo = refMotivo.current.value;
+        var motivo = refMotivo.current.value;
         var fecha = refFecha.current.value;
         var hora = refHora.current.value;
         var periodo = refPeriodo.current.value;
@@ -48,15 +48,52 @@ export function Reserva() {
             if (materia != "Seleccionar Materia") {
                 if (grupo != "") {
                     if (grupo > 0 && grupo < 6) {
-                        if ( cantidadEstudiantes!= "") {
+                        if (cantidadEstudiantes != "") {
                             if (cantidadEstudiantes > 0 && cantidadEstudiantes < 301) {
-                                if (exiteAula(aula)){
-                                    console.log("Solicitud enviada");
-                                toast.success("SOLICITUD ENVIADA", { position: "top-center" })
-                                }else{
-                                    console.log("Aula no existe");
-                                toast.error("AULA INVALIDA", { position: "top-center" })
+                                if (aula != "") {
+                                    if (exiteAula(aula)) {
+                                        if (motivo != "Seleccionar Motivo") {
+                                            if (fecha != "") {
+                                                const fechaActual = new Date().toISOString();
+                                                if (fecha > fechaActual) {
+                                                    if (hora != "") {
+                                                        if (hora.substring(0, 2) > 7 && hora.substring(0, 2) < 21) {
+                                                            if (periodo != "Seleccionar Periodo") {
+                                                                console.log("Solicitud enviada");
+                                                                toast.success("SOLICITUD ENVIADA", { position: "top-center" })
+                                                            } else {
+                                                                console.log("Seleccionar Periodo");
+                                                                toast.error("SELECCIONAR PERIODO", { position: "top-center" })
+                                                            }
+                                                        } else {
+                                                            console.log("Hora no valida");
+                                                            toast.error("HORA INVALIDA", { position: "top-center" })
+                                                        }
+                                                    } else {
+                                                        console.log("Introducir Hora");
+                                                        toast.error("INTRODUCIR HORA", { position: "top-center" })
+                                                    }
+                                                } else {
+                                                    console.log("Fecha no valida");
+                                                    toast.error("FECHA INVALIDA", { position: "top-center" })
+                                                }
+                                            } else {
+                                                console.log("Introducir Fecha");
+                                                toast.error("INTRODUCIR FECHA", { position: "top-center" })
+                                            }
+                                        } else {
+                                            console.log("No hay motivo");
+                                            toast.error("SELECCIONAR MOTIVO", { position: "top-center" })
+                                        }
+                                    } else {
+                                        console.log("Aula no existe");
+                                        toast.error("AULA INVALIDA", { position: "top-center" })
+                                    }
+                                } else {
+                                    console.log("Introducir Aula");
+                                    toast.error("INTRODUCIR AULA", { position: "top-center" })
                                 }
+
                             } else {
                                 console.log("Cantidad Estudiantes Fuera Del Rango");
                                 toast.error("CANTIDAD ESTUDIANTES FUERA DEL RANGO", { position: "top-center" })
@@ -212,8 +249,9 @@ export function Reserva() {
                                 <div className='col-sm-4 mt-3'>
                                     <h4> Periodo :</h4>
                                     <select class="form-select" ref={refPeriodo} required>
-                                        <option value={1}>1 Periodo</option>
-                                        <option value={2}>2 Periodo</option>
+                                        <option selected>1 Periodo</option>
+                                        <option selected>2 Periodo</option>
+                                        <option selected>Seleccionar Periodo</option>
                                     </select>
                                 </div>
                             </div>
