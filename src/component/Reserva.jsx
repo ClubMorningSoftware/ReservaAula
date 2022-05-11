@@ -28,6 +28,10 @@ export function Reserva() {
         toast.success("SESION CERRADA CON EXITO", { position: "top-center" })
     }
 
+    const Perfil = () => {
+        historial.push('/perfil')
+    }
+
     const exiteAula = (aula) => {
         return true;
     }
@@ -42,8 +46,6 @@ export function Reserva() {
         var fecha = refFecha.current.value;
         var hora = refHora.current.value;
         var periodo = refPeriodo.current.value;
-        //console.log(carrera, materia, grupo, cantidadEstudiantes, aula, motivo, fecha, hora, periodo)
-        /**/
         if (carrera != "Seleccionar Carrera") {
             if (materia != "Seleccionar Materia") {
                 if (grupo != "") {
@@ -124,7 +126,7 @@ export function Reserva() {
             <div className='containerEncabezado'>
                 <div className='row'>
                     <div className='col'>
-                        <button type="button" class="btn btn-info sm-1 offset-1 mt-3">Perfil</button>
+                        <button onClick ={Perfil} type="button" class="btn btn-info sm-1 offset-1 mt-3">Perfil</button>
                     </div>
                     <div className='col'>
                         <h3 className='-sm-6 offset-4 mt-3'>Reserva Aula</h3>
