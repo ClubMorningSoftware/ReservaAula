@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 export function Registro() {
     const historial = useHistory();
-    const refCodigoSis = useRef(null);
+    const refNombreUsuario = useRef(null);
     const refNombre = useRef(null);
     const refCorreo = useRef(null);
     const refContraseña = useRef(null);
@@ -14,20 +14,19 @@ export function Registro() {
     var hay_numero = false
 
     const Registrarse = () => {
-        var codigoSis = refCodigoSis.current.value;
+        var nombreUsuario = refNombreUsuario.current.value;
         var nombre = refNombre.current.value;
         var correo = refCorreo.current.value;
         var contraseña = refContraseña.current.value;
         var repetirContraseña = refRepetirContraseña.current.value;
-        if (codigoSis != "") {
-            if (isNaN(codigoSis) == false) {
-                if (codigoSis.length == 9) {
+        if (nombreUsuario != "") {
+                if (nombreUsuario.length >3 && nombreUsuario.length < 15) {
                     if (nombre != "") {
                         if (nombre.length > 2 && nombre.length < 31) {
                             hayNumero(nombre)
                             if (hay_numero == false) {
                                 if (correo != "") {
-                                    if (correo.indexOf('@') > 0) {
+                                    if (correo.indexOf('@') > 0 && correo.indexOf('umss') > 0) {
                                         if (contraseña != "") {
                                             if (contraseña.length > 4 && contraseña.length < 31) {
                                                 if (repetirContraseña != "") {
@@ -35,7 +34,7 @@ export function Registro() {
                                                         existeCuenta()
                                                         if (!existe) {
                                                             console.log("Registrado");
-                                                            document.title = codigoSis;
+                                                            document.title = nombreUsuario;
                                                             toast.success('REGISTRO EXITOSO')
                                                             historial.push('/reserva');
                                                         } else {
@@ -85,10 +84,6 @@ export function Registro() {
                     console.log("Nombre usuario no admitido");
                     toast.error("NOMBRE DE USUARIO INVALIDO ", { position: "top-center" })
                 }
-            } else {
-                console.log("Nombre usuario Tiene que ser numeros");
-                toast.error("NOMBRE DE USUARIO INVALIDO", { position: "top-center" })
-            }
         } else {
             console.log("Nombre Usuario No Introducida");
             toast.error("INTRODUCIR NOMBRE DE USUARIO", { position: "top-center" })
@@ -149,7 +144,7 @@ export function Registro() {
                                     placeholder="Nombre de usuario"
                                     aria-label="Username"
                                     aria-describedby="basic-addon1"
-                                    ref={refCodigoSis}
+                                    ref={refNombreUsuario}
                                 />
                             </div>
                             <div className="input-group mb-3">

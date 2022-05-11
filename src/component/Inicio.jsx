@@ -17,7 +17,6 @@ export function Inicio() {
         var contraseña = refContraseña.current.value;
         if (usuario != "") {
             if (contraseña != "") {
-                if (isNaN(usuario) == false) {
                     if (usuario == "201801656") {
                         if (contraseña == "123456") {
                             document.title = usuario;
@@ -32,11 +31,6 @@ export function Inicio() {
                         console.log("No Existe Usuario");
                         toast.error("CUENTA NO REGISTRADA", { position: "top-center" })
                     }
-                } else {
-                    console.log("Nombre usuario no valido");
-                    toast.error("NOMBRE DE USUARIO INVALIDO", { position: "top-center" })
-                }
-
             } else {
                 console.log("Contraseña No Introducida");
                 toast.error("INTRODUCIR CONTRASEÑA", { position: "top-center" })
