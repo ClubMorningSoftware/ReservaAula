@@ -77,14 +77,14 @@ export function Inicio() {
                                         ref={refContraseña}
                                     />
                                 </div>
-                                <div class="d-grid gap-2 mt-2">
+                                <div className="d-grid gap-2 mt-2">
                                     <button onClick={IniciarSeSion} type="button" class="btn btn-info">ACCEDER</button>
                                     <Toaster
                                         position="top-center"
                                         reverseOrder={false}
                                     />
                                 </div>
-                                <div class="d-grid gap-2 mt-4">
+                                <div className="d-grid gap-2 mt-4">
                                     <button onClick={Registrarse} type="button" class="btn btn-info">REGISTARSE</button>
                                 </div>
                             </div>

@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { useHistory } from 'react-router-dom';
+import Modal from '@material-ui/core/Modal'
 
 export function Reserva() {
     const historial = useHistory();
     const titulo = document.title;
     const [NroAula, setNroAula] = useState('');
+    const [modal, setModal] = useState(false)
     const refCarrera = useRef(null);
     const refMateria = useRef(null);
     const refGrupo = useRef(null);
@@ -15,6 +17,10 @@ export function Reserva() {
     const refFecha = useRef(null);
     const refHora = useRef(null);
     const refPeriodo = useRef(null);
+
+    const abrirCerrarModal = () => {
+        setModal(!modal);
+    }
 
     const mayuscula = (event) => {
         event.preventDefault();
@@ -35,6 +41,7 @@ export function Reserva() {
     const exiteAula = (aula) => {
         return true;
     }
+
 
     const EnviarSolicitud = () => {
         var carrera = refCarrera.current.value;
@@ -126,7 +133,7 @@ export function Reserva() {
             <div className='containerEncabezado'>
                 <div className='row'>
                     <div className='col'>
-                        <button onClick ={Perfil} type="button" class="btn btn-info sm-1 offset-1 mt-3">Perfil</button>
+                        <button onClick={Perfil} type="button" class="btn btn-info sm-1 offset-1 mt-3">Perfil</button>
                     </div>
                     <div className='col'>
                         <h3 className='-sm-6 offset-4 mt-3'>Reserva Aula</h3>
@@ -214,7 +221,22 @@ export function Reserva() {
                                     />
                                 </div>
                                 <div className='col mt-3'>
-                                    <button type="button" class="btn btn-info ">🏫</button>
+                                    <button onClick={abrirCerrarModal} type="button" class="btn btn-info ">🏫</button>
+                                    <Modal
+                                        open={modal}>
+                                        <div className='contenedorModal'>
+                                            <div className='containerEncabezadoModal'>
+                                                <div className='row'>
+                                                    <div className='col'>
+                                                        <h3 className='mt-3'>Aulas</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className='contenedorCerrar'>
+                                                <button onClick={abrirCerrarModal} type="button" class="btn btn-info ">❌</button>
+                                            </div>
+                                        </div>
+                                    </Modal>
                                 </div>
                             </div>
                             <div className='row'>

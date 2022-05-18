@@ -26,7 +26,7 @@ export function Registro() {
                             hayNumero(nombre)
                             if (hay_numero == false) {
                                 if (correo != "") {
-                                    if (correo.indexOf('@') > 0 && correo.indexOf('umss') > 0) {
+                                    if (correo.indexOf("@fcyt.umss.edu.bo") > 0) {
                                         if (contraseña != "") {
                                             if (contraseña.length > 4 && contraseña.length < 31) {
                                                 if (repetirContraseña != "") {
@@ -199,7 +199,7 @@ export function Registro() {
                                     ref={refRepetirContraseña}
                                 />
                             </div>
-                            <div class="d-grid gap-2">
+                            <div className="d-grid gap-2">
                                 <button onClick={Registrarse} type="button" class="btn btn-info">ACCEDER</button>
                                 <Toaster
                                     position="top-center"
