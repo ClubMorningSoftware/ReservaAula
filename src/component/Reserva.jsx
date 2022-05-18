@@ -235,6 +235,7 @@ export function Reserva() {
                                             <div className='contenedorCerrar'>
                                                 <button onClick={abrirCerrarModal} type="button" class="btn btn-info ">❌</button>
                                             </div>
+                                            
                                         </div>
                                     </Modal>
                                 </div>
