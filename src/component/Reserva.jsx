@@ -17,6 +17,8 @@ export function Reserva() {
     const refFecha = useRef(null);
     const refHora = useRef(null);
     const refPeriodo = useRef(null);
+    const [aulaReservada, setAulaReservada] = useState(false)
+    const [aulaDisponible, setAulaDisponible] = useState(null)
 
     const abrirCerrarModal = () => {
         setModal(!modal);
@@ -27,6 +29,7 @@ export function Reserva() {
         setNroAula(event.target.value.toUpperCase());
 
     }
+
     const CerrarSesion = () => {
         document.title = "Reserva de Aulas"
         historial.push('/')
@@ -41,7 +44,6 @@ export function Reserva() {
     const exiteAula = (aula) => {
         return true;
     }
-
 
     const EnviarSolicitud = () => {
         var carrera = refCarrera.current.value;
@@ -128,6 +130,7 @@ export function Reserva() {
             toast.error("SELECCIONAR CARRERA", { position: "top-center" })
         }
     }
+
     return (
         <div>
             <div className='containerEncabezado'>
@@ -221,7 +224,9 @@ export function Reserva() {
                                     />
                                 </div>
                                 <div className='col mt-3'>
-                                    <button onClick={abrirCerrarModal} type="button" class="btn btn-info ">🏫</button>
+                                    <button onClick={() => {
+                                        setModal(!modal);
+                                    }} type="button" class="btn btn-info ">🏫</button>
                                     <Modal
                                         open={modal}>
                                         <div className='contenedorModal'>
@@ -232,10 +237,661 @@ export function Reserva() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className='contenedorCerrar'>
-                                                <button onClick={abrirCerrarModal} type="button" class="btn btn-info ">❌</button>
+                                            <div className='col'>
+                                                <div className='contenedorCerrar'>
+                                                    <button onClick={abrirCerrarModal} type="button" class="btn btn-info ">❌</button>
+                                                </div>
                                             </div>
-                                            
+                                            <div clasName='contenedorAula'>
+                                                <div className='d-flex justify-content-between'>
+                                                    <div className='bordeAula2'>
+                                                        <div className='segmento'>
+                                                            <div className='row'>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">690A</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">690B</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                            </div>
+                                                            <div className='row mt-4'>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">690C</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">690D</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                            </div>
+                                                            <h3 className='plantabaja'>PLANTA BAJA</h3>
+                                                        </div>
+                                                    </div>
+                                                    <div className='bordeAula'>
+                                                        <div className='segmento'>
+                                                            <div className='row'>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">691A</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">691B</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                            </div>
+                                                            <div className='row mt-4'>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">691C</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">691D</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                            </div>
+                                                            <div className='row mt-4'>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">691E</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">691F</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <h3 className='piso1'>PISO 1</h3>
+                                                    </div>
+                                                    <div className='bordeAula'>
+                                                        <div className='segmento'>
+                                                            <div className='row'>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">692A</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">692B</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                            </div>
+                                                            <div className='row mt-4'>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">692C</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">692D</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                            </div>
+                                                            <div className='row mt-4'>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">692E</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">692F</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                            </div>
+                                                            <div className='row mt-4'>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">692G</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">692H</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                            </div>
+                                                            <h3 className='piso2'>PISO 2</h3>
+                                                        </div>
+                                                    </div>
+                                                    <div className='bordeAula1'>
+                                                        <div className='segmento'>
+                                                            <div className='row mt-4'>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">693A</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">693B</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                            </div>
+                                                            <div className='row mt-4'>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">693C</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                                <div className='col'>
+                                                                    <button onClick={() => {
+                                                                        setAulaReservada(!aulaReservada);
+                                                                        setAulaDisponible("Me funciona")
+                                                                    }} type="button" class="btn btn-info ">693D</button>
+                                                                    <Modal
+                                                                        open={aulaReservada}>
+                                                                        <div className='ModalEmergente'>
+                                                                            <div className='containerEncabezadoModal'>
+                                                                                <div className='row'>
+                                                                                    <div className='col'>
+                                                                                        <h3 className='mt-3'>Aulas</h3>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='col'>
+                                                                                <div className='contenedorCerrarEmergente'>
+                                                                                    <button onClick={() => {
+                                                                                        setAulaReservada(!aulaReservada);
+                                                                                    }} type="button" class="btn btn-info ">❌</button>
+                                                                                </div>
+                                                                                <h3>{aulaDisponible}</h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Modal>
+                                                                </div>
+                                                            </div>
+                                                            <div className='row mt-4'>
+                                                                <div className='col-ms-4'>
+                                                                    <div className='botonAudi'>
+                                                                        <button onClick={() => {
+                                                                            setAulaReservada(!aulaReservada);
+                                                                            setAulaDisponible("Me funciona")
+                                                                        }} type="button" class="btn btn-info ">AUDITORIA</button>
+                                                                        <Modal
+                                                                            open={aulaReservada}>
+                                                                            <div className='ModalEmergente'>
+                                                                                <div className='containerEncabezadoModal'>
+                                                                                    <div className='row'>
+                                                                                        <div className='col'>
+                                                                                            <h3 className='mt-3'>Aulas</h3>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div className='col'>
+                                                                                    <div className='contenedorCerrarEmergente'>
+                                                                                        <button onClick={() => {
+                                                                                            setAulaReservada(!aulaReservada);
+                                                                                        }} type="button" class="btn btn-info ">❌</button>
+                                                                                    </div>
+                                                                                    <h3>{aulaDisponible}</h3>
+                                                                                </div>
+                                                                            </div>
+                                                                        </Modal>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <h3 className='piso3'>PISO 3</h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </Modal>
                                 </div>
@@ -283,7 +939,6 @@ export function Reserva() {
                             <div class="d-grid gap-2 mt-3">
                                 <button onClick={EnviarSolicitud} type="button" class="btn btn-info">Enviar Solicitud</button>
                             </div>
-
                         </div>
                     </div>
                 </div>
