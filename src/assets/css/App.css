@@ -143,3 +143,14 @@ button:active {
     left: 35%;
     border: 2px solid black;
 }
+
+.containerHora{
+    margin-top: 30px;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.botonVerificar{
+    margin-left: 145px;
+    margin-top: 25px;
+}
