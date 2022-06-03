@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import '../assets/css/App.css';
 import toast, { Toaster } from 'react-hot-toast';
 import { useHistory } from 'react-router-dom';
+import Select from 'react-select';
 
 export function Registro() {
     const historial = useHistory();
@@ -13,6 +14,13 @@ export function Registro() {
     var existe = true;
     var hay_numero = false
 
+    const opcionesCarrera = [
+        { value: "Ingenieria Sistemas", label: "Ingenieria Sistemas" },
+        { value: "Ingenieria Civil", label: "Ingenieria Civil" },
+        { value: "Ingenieria Industrial", label: "Ingenieria Industrial" },
+        { value: "Ingenieria mecanica", label: "Ingenieria mecanica" }
+    ]
+
     const Registrarse = () => {
         var nombreUsuario = refNombreUsuario.current.value;
         var nombre = refNombre.current.value;
@@ -20,70 +28,70 @@ export function Registro() {
         var contraseña = refContraseña.current.value;
         var repetirContraseña = refRepetirContraseña.current.value;
         if (nombreUsuario != "") {
-                if (nombreUsuario.length >3 && nombreUsuario.length < 15) {
-                    if (nombre != "") {
-                        if (nombre.length > 2 && nombre.length < 31) {
-                            hayNumero(nombre)
-                            if (hay_numero == false) {
-                                if (correo != "") {
-                                    if (correo.indexOf("@fcyt.umss.edu.bo") > 0) {
-                                        if (contraseña != "") {
-                                            if (contraseña.length > 4 && contraseña.length < 31) {
-                                                if (repetirContraseña != "") {
-                                                    if (contraseña == repetirContraseña) {
-                                                        existeCuenta()
-                                                        if (!existe) {
-                                                            console.log("Registrado");
-                                                            document.title = nombreUsuario;
-                                                            toast.success('REGISTRO EXITOSO')
-                                                            historial.push('/reserva');
-                                                        } else {
-                                                            console.log("Ya Existe Usuario");
-                                                            toast.error("LA CUENTA YA EXISTE", {
-                                                                position: "top-center"
-                                                            })
-                                                        }
+            if (nombreUsuario.length > 3 && nombreUsuario.length < 15) {
+                if (nombre != "") {
+                    if (nombre.length > 2 && nombre.length < 31) {
+                        hayNumero(nombre)
+                        if (hay_numero == false) {
+                            if (correo != "") {
+                                if (correo.indexOf("@fcyt.umss.edu.bo") > 0) {
+                                    if (contraseña != "") {
+                                        if (contraseña.length > 4 && contraseña.length < 31) {
+                                            if (repetirContraseña != "") {
+                                                if (contraseña == repetirContraseña) {
+                                                    existeCuenta()
+                                                    if (!existe) {
+                                                        console.log("Registrado");
+                                                        document.title = nombreUsuario;
+                                                        toast.success('REGISTRO EXITOSO')
+                                                        historial.push('/reserva');
                                                     } else {
-                                                        console.log("Contraseña no coinciden");
-                                                        toast.error("CONTRASEÑAS NO COINCIDEN", { position: "top-center" })
+                                                        console.log("Ya Existe Usuario");
+                                                        toast.error("LA CUENTA YA EXISTE", {
+                                                            position: "top-center"
+                                                        })
                                                     }
                                                 } else {
-                                                    console.log("Repetir Contraseña No Introducida");
-                                                    toast.error("REPITA LA CONTRASEÑA", { position: "top-center" })
+                                                    console.log("Contraseña no coinciden");
+                                                    toast.error("CONTRASEÑAS NO COINCIDEN", { position: "top-center" })
                                                 }
                                             } else {
-                                                console.log("Contraseña No Valida");
-                                                toast.error("CONTRASEÑA INVALIDA", { position: "top-center" })
+                                                console.log("Repetir Contraseña No Introducida");
+                                                toast.error("REPITA LA CONTRASEÑA", { position: "top-center" })
                                             }
                                         } else {
-                                            console.log("Contraseña No Introducida");
-                                            toast.error("INTRODUCIR CONTRASEÑA", { position: "top-center" })
+                                            console.log("Contraseña No Valida");
+                                            toast.error("CONTRASEÑA INVALIDA", { position: "top-center" })
                                         }
                                     } else {
-                                        console.log("Correo No valido");
-                                        toast.error("CORREO INVALIDO", { position: "top-center" })
+                                        console.log("Contraseña No Introducida");
+                                        toast.error("INTRODUCIR CONTRASEÑA", { position: "top-center" })
                                     }
                                 } else {
-                                    console.log("Correo No Introducida");
-                                    toast.error("INTRODUCIR CORREO", { position: "top-center" })
+                                    console.log("Correo No valido");
+                                    toast.error("CORREO INVALIDO", { position: "top-center" })
                                 }
                             } else {
-                                hay_numero = false
-                                console.log("Nombre No Valido Hay Numeros");
-                                toast.error("NOMBRE NO VALIDO ", { position: "top-center" })
+                                console.log("Correo No Introducida");
+                                toast.error("INTRODUCIR CORREO", { position: "top-center" })
                             }
                         } else {
-                            console.log("Nombre No Valido");
-                            toast.error("NOMBRE NO VALIDO", { position: "top-center" })
+                            hay_numero = false
+                            console.log("Nombre No Valido Hay Numeros");
+                            toast.error("NOMBRE NO VALIDO ", { position: "top-center" })
                         }
                     } else {
-                        console.log("Nombre No Introducida");
-                        toast.error("INTRODUCIR NOMBRE", { position: "top-center" })
+                        console.log("Nombre No Valido");
+                        toast.error("NOMBRE NO VALIDO", { position: "top-center" })
                     }
                 } else {
-                    console.log("Nombre usuario no admitido");
-                    toast.error("NOMBRE DE USUARIO INVALIDO ", { position: "top-center" })
+                    console.log("Nombre No Introducida");
+                    toast.error("INTRODUCIR NOMBRE", { position: "top-center" })
                 }
+            } else {
+                console.log("Nombre usuario no admitido");
+                toast.error("NOMBRE DE USUARIO INVALIDO ", { position: "top-center" })
+            }
         } else {
             console.log("Nombre Usuario No Introducida");
             toast.error("INTRODUCIR NOMBRE DE USUARIO", { position: "top-center" })
@@ -160,7 +168,35 @@ export function Registro() {
                                     ref={refNombre}
                                 />
                             </div>
-                            <div className="input-group mb-3">
+                            <div className='row mt-2'>
+                                <div className='col-sm-3'>
+                                    <h5>
+                                        Carrera:
+                                    </h5>
+                                </div>
+                                <div className='col'>
+                                    <Select className="basic-multi-select"
+                                        options={opcionesCarrera}
+                                        placeholder="Seleccionar Carrera(s)"
+                                        isMulti
+                                    />
+                                </div>
+                            </div>
+                            <div className='row mt-2'>
+                                <div className='col-sm-3'>
+                                    <h5>
+                                        Materia:
+                                    </h5>
+                                </div>
+                                <div className='col'>
+                                <Select className="basic-multi-select"
+                                        options={opcionesCarrera}
+                                        placeholder="Seleccionar Materia(s)"
+                                        isMulti
+                                    />
+                                </div>
+                            </div>
+                            <div className="input-group mb-3 mt-3">
                                 <span className="input-group-text" id="basic-addon3">
                                     📧
                                 </span>
@@ -210,6 +246,6 @@ export function Registro() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }

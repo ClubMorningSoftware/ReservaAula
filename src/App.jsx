@@ -3,11 +3,13 @@ import {Inicio} from './component/Inicio';
 import { Registro } from "./component/Registro";
 import {Reserva} from "./component/Reserva";
 import { Perfil } from "./component/Perfil";
+
 import {
     BrowserRouter as Router,
     Switch, 
     Route
   } from 'react-router-dom';
+import Administrador from "./component/Administrador";
 
 export function App(){
     document.title = "Reserva Aulas"
@@ -18,6 +20,7 @@ export function App(){
                 <Route path = '/registro'><Registro/></Route>
                 <Route path = '/reserva'><Reserva/></Route>
                 <Route path = '/perfil'><Perfil/></Route>
+                <Route path = '/administrador'><Administrador/></Route>
             </Switch>
         </Router>
     );
