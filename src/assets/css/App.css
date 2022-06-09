@@ -13,7 +13,7 @@
     top:15%;
     height: 70%;
     left: 13%;
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
 .bordeAula{
@@ -54,7 +54,7 @@
 
 .containerEncabezado{
     background-color: aqua;
-    border: 5px solid black;
+    border: 2px solid black;
     block-size: 80px;
 }
 
