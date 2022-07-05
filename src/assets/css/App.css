@@ -5,6 +5,12 @@
     
 }
 
+.encabezadoHora{
+    color:black;
+    text-align: center;
+    
+}
+
 .contenedorAula{
     /*position: absolute;
     /*margin-top: 100px;*/
@@ -40,6 +46,41 @@
     border: 2px solid black;
 }
 
+.contenedorModalRegistro{
+    position: absolute;
+    /*margin-top: 100px;*/
+    background-color: white;
+    width: 50%;
+    top:3%;
+    height: 90%;
+    left: 25%;
+    border: 2px solid black;
+}
+
+.contenedorModalEditar{
+    position: absolute;
+    /*margin-top: 100px;*/
+    background-color: white;
+    width: 40%;
+    top:30%;
+    height: 35%;
+    left: 30%;
+    border: 2px solid black;
+}
+
+.containerEncabezadoModalPerfil{
+    background-color: aqua;
+    block-size: 70px;
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+
+.contenedorCerrarPerfil{
+    position: absolute;
+    top: 6%;
+    left: 88%;
+}
+
 .contenedorCerrar{
     position: absolute;
     top: 2%;
@@ -61,6 +102,13 @@
 .containerEncabezadoModal{
     background-color: aqua;
     block-size: 70px;
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+
+.containerEncabezadoModalRegistro{
+    background-color: aqua;
+    block-size: 80px;
     border-bottom: 2px solid black;
     text-align: center;
 }
@@ -144,18 +192,8 @@ button:active {
     border: 2px solid black;
 }
 
-.containerHora{
+.containerEditar{
     margin-top: 30px;
-    margin-left: 150px;
-    margin-right: 150px;
-}
-
-.botonVerificar{
-    margin-left: 145px;
-    margin-top: 25px;
-}
-.selecMulti{
-    width: 298px;
-    height: 50px;
-    margin-bottom: 2px;
+    margin-left: 120px;
+    margin-right: 120px;
 }

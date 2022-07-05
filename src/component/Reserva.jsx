@@ -1,6 +1,9 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 export function Reserva() {
     const historial = useHistory();
@@ -13,86 +16,107 @@ export function Reserva() {
     const refFecha = useRef(null);
     const refHora = useRef(null);
     const refPeriodo = useRef(null);
+    const [docente, setDocente] = useState(false);
+
+    if (titulo=="Reserva Aulas"){
+        historial.push('/')
+    }
+
+    window.onbeforeunload = function (e) {
+        return "You have some unsaved changes"
+    };
 
     /*const mayuscula = (event) => {
         event.preventDefault();
         setNroAula(event.target.value.toUpperCase());
     }*/
+    var dato = []
+    var [listaCarrera, setListaCarrera] = useState([])
+    var [listaMateria, setListaMateria] = useState([])
+    const peticionGet = async () => {
+        axios.get('http://cms.tis.cs.umss.edu.bo/docenteEspecificoNombre/' + titulo).then(response => {
+            dato = response.data
+            var codigoDocente = dato[0].CODDOCENTE
+            axios.get('http://cms.tis.cs.umss.edu.bo/obtenerCarreraDocente/' + codigoDocente).then(carreras => {
+                setListaCarrera(carreras.data)
+            })
+        })
+    }
+    useEffect(() => {
+        peticionGet();
+    }, [])
 
     const esBisiesto = (year) => {
-        return (year % 400 === 0) ? true : 
-                    (year % 100 === 0) ? false : 
-                        year % 4 === 0;
-      };
+        return (year % 400 === 0) ? true :
+            (year % 100 === 0) ? false :
+                year % 4 === 0;
+    };
 
     const FechaValida = (fecha) => {
         var esValido = true
-        var año = parseInt(fecha.substring(2,4))
-        var mes = parseInt(fecha.substring(5,7))
-        var diaFecha = parseInt(fecha.substring(8,10))
+        var año = parseInt(fecha.substring(2, 4))
+        var mes = parseInt(fecha.substring(5, 7))
+        var diaFecha = parseInt(fecha.substring(8, 10))
         var valor
-        if (mes == 1){
-            if (esBisiesto(año)){
-                valor  = 6
-            }else{
+        if (mes == 1) {
+            if (esBisiesto(año)) {
+                valor = 6
+            } else {
                 valor = 0
             }
-            
-        }else{
-            if (mes == 2){
-                if (esBisiesto(año)){
-                    valor  = 2
-                  }else{
+
+        } else {
+            if (mes == 2) {
+                if (esBisiesto(año)) {
+                    valor = 2
+                } else {
                     valor = 3
-                  }
-            }else{
-                if (mes == 3){
+                }
+            } else {
+                if (mes == 3) {
                     valor = 3
-                }else{
-                    if (mes == 4){
+                } else {
+                    if (mes == 4) {
                         valor = 6
-                    }else{
-                        if (mes == 5){
+                    } else {
+                        if (mes == 5) {
                             valor = 1
-                        }else{
-                            if (mes == 6){
+                        } else {
+                            if (mes == 6) {
                                 valor = 4
-                            }else{
-                                if (mes == 7){
+                            } else {
+                                if (mes == 7) {
                                     valor = 6
-                                }else{
-                                    if (mes == 8){
+                                } else {
+                                    if (mes == 8) {
                                         valor = 2
-                                    }else{
-                                        if (mes == 9){
+                                    } else {
+                                        if (mes == 9) {
                                             valor = 5
-                                        }else{
-                                            if (mes == 10){
+                                        } else {
+                                            if (mes == 10) {
                                                 valor = 0
-                                            }else{
-                                                if (mes == 11){
+                                            } else {
+                                                if (mes == 11) {
                                                     valor = 3
-                                                }else{
+                                                } else {
                                                     valor = 5
-                                                }   
-                                            }   
-                                        }   
-                                    }   
-                                }   
-                            }   
-                        }   
-                    }   
-                }   
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
-        var dia = (((diaFecha+valor+año+(año/4)+6)%7)) 
-        console.log(dia)
-        if (dia < 1){
+        var dia = (((diaFecha + valor + año + (año / 4) + 6) % 7))
+        if (dia < 1) {
             esValido = false
-            console.log("Fecha Invalida")  
-        }else{
+        } else {
             esValido = true
-            console.log("Fecha Valida")
         }
         return esValido
     }
@@ -105,19 +129,20 @@ export function Reserva() {
     }
 
     const Perfil = () => {
+
         historial.push('/perfil')
     }
 
-    const editarTodo  = () => {
-        document.getElementById("CarreraInterfaz").value="Seleccionar Carrera";
-        document.getElementById("MateriaInterfaz").value="Seleccionar Materia";
-        document.getElementById("grupoInterfaz").value="";
-        document.getElementById("estudiantesInterfaz").value="";
-        document.getElementById("motivoInterfaz").value="Seleccionar Motivo";
-        document.getElementById("fechaInterfaz").value="";
-        document.getElementById("horaInterfaz").value="";
-        document.getElementById("periodoInterfaz").value="Seleccionar Periodo";
-        console.log("editado")
+    const editarTodo = () => {
+
+        document.getElementById("carreraInterfaz").value = -1;
+        document.getElementById("materiaInterfaz").value = -1;
+        document.getElementById("grupoInterfaz").value = "";
+        document.getElementById("estudiantesInterfaz").value = "";
+        document.getElementById("motivoInterfaz").value = "Seleccionar Motivo";
+        document.getElementById("fechaInterfaz").value = "";
+        document.getElementById("horaInterfaz").value = "Seleccionar Hora";
+        document.getElementById("periodoInterfaz").value = "Seleccionar Periodo";
     }
 
     const EnviarSolicitud = () => {
@@ -129,8 +154,8 @@ export function Reserva() {
         var fecha = refFecha.current.value;
         var hora = refHora.current.value;
         var periodo = refPeriodo.current.value;
-        if (carrera != "Seleccionar Carrera") {
-            if (materia != "Seleccionar Materia") {
+        if (carrera != -1) {
+            if (materia != -1) {
                 if (grupo != "") {
                     if (grupo > 0 && grupo < 6) {
                         if (cantidadEstudiantes != "") {
@@ -139,57 +164,32 @@ export function Reserva() {
                                     if (fecha != "") {
                                         const fechaActual = new Date().toISOString();
                                         if (fecha > fechaActual) {
-                                            if (FechaValida(fecha)){
-                                                if (hora != "") {
-                                                    if (hora.substring(0, 2) > 5 && hora.substring(0, 2) < 18) {
-                                                        if (hora.substring(0, 2) == 6) {
-                                                            if (hora.substring(3, 5) > 44) {
-                                                                if (periodo != "Seleccionar Periodo") {
-                                                                    console.log("Solicitud enviada");
-                                                                    toast.success("SOLICITUD ENVIADA", { position: "top-center" })
-                                                                } else {
-                                                                    console.log("Seleccionar Periodo");
-                                                                    toast.error("SELECCIONAR PERIODO", { position: "top-center" })
-                                                                }
-                                                            } else {
-                                                                console.log("Hora Invalida");
-                                                                toast.error("HORA INVALIDA", { position: "top-center" })
+                                            if (FechaValida(fecha)) {
+                                                if (hora != "Seleccionar Hora") {
+                                                    if (periodo != "Seleccionar Periodo") {
+                                                        //principal
+                                                        var nomCarrera
+                                                        listaCarrera.map(i => {
+                                                            if (i.CODCARRERA == carrera) {
+                                                                nomCarrera = i.NOMBRECARRERA
                                                             }
-                                                        } else {
-                                                            if (hora.substring(0, 2) == 17) {
-                                                                if (hora.substring(3, 5) < 16) {
-                                                                    if (periodo != "Seleccionar Periodo") {
-                                                                        console.log("Solicitud enviada");
-                                                                        toast.success("SOLICITUD ENVIADA", { position: "top-center" })
-                                                                    } else {
-                                                                        console.log("Seleccionar Periodo");
-                                                                        toast.error("SELECCIONAR PERIODO", { position: "top-center" })
-                                                                    }
-                                                                } else {
-                                                                    console.log("Hora Invalida");
-                                                                    toast.error("HORA INVALIDA", { position: "top-center" })
-                                                                }
-                                                            } else {
-                                                                if (periodo != "Seleccionar Periodo") {
-                                                                    //principal
-                                                                    editarTodo()
-                                                                    console.log("Solicitud enviada");
-                                                                    toast.success("SOLICITUD ENVIADA", { position: "top-center" })
-                                                                } else {
-                                                                    console.log("Seleccionar Periodo");
-                                                                    toast.error("SELECCIONAR PERIODO", { position: "top-center" })
-                                                                }
+                                                        })
+                                                        var nomMateria
+                                                        listaMateria.map(i => {
+                                                            if (i.CODMATERIA == materia) {
+                                                                nomMateria = i.NOMBREMATERIA
                                                             }
-                                                        }
+                                                        })
+                                                        agregarBaseDatos(titulo, nomCarrera, nomMateria, grupo, cantidadEstudiantes, motivo, fecha, hora, periodo)
                                                     } else {
-                                                        console.log("Hora no valida");
-                                                        toast.error("HORA INVALIDA", { position: "top-center" })
+                                                        console.log("Seleccionar Periodo");
+                                                        toast.error("SELECCIONAR PERIODO", { position: "top-center" })
                                                     }
                                                 } else {
                                                     console.log("Introducir Hora");
                                                     toast.error("INTRODUCIR HORA", { position: "top-center" })
                                                 }
-                                            }else{
+                                            } else {
                                                 console.log("Fecha no valida");
                                                 toast.error("FECHA INVALIDA", { position: "top-center" })
                                             }
@@ -230,6 +230,35 @@ export function Reserva() {
             toast.error("SELECCIONAR CARRERA", { position: "top-center" })
         }
     }
+
+    const agregarBaseDatos = (nombre, carrera, materia, grupo, cantidadEstudiantes, motivo, fecha, hora, periodo) => {
+
+        axios.post('http://cms.tis.cs.umss.edu.bo/añadirReserva', {
+            "DOCENTE": nombre,
+            "CARRERA": carrera,
+            "MATERIA": materia,
+            "GRUPO": grupo,
+            "CANTIDADESTUDIANTES": cantidadEstudiantes,
+            "MOTIVO": motivo,
+            "FECHA": fecha,
+            "HORA": hora,
+            "PERIODO": periodo,
+            "AULA": "",
+            "CONFIRMADO": "",
+            "RECHAZADO": ""
+        }).then(response => {
+            editarTodo()
+            console.log("Solicitud enviada");
+            toast.success("SOLICITUD ENVIADA", { position: "top-center" })
+        })
+    }
+
+    const cargarMaterias = function (e) {
+        const opcion = e.target.value;
+        axios.get('http://cms.tis.cs.umss.edu.bo/materiaCarreraDocente/' + opcion).then(response => {
+            setListaMateria(response.data);
+        })
+    }
     return (
         <div>
             <div className='containerEncabezado'>
@@ -255,11 +284,14 @@ export function Reserva() {
                                     <h4> Carrera :</h4>
                                 </div>
                                 <div className='col-sm-8 mt-3'>
-                                    <select class="form-select" ref={refCarrera} required id='CarreraInterfaz'>
-                                        <option value = "Ingenieria Sistemas" selected>Ingenieria Sistemas</option>
-                                        <option value = "Ingenieria Civil" selected>Ingenieria Civil</option>
-                                        <option value = "Ingenieria Industrial" selected>Ingenieria Industrial</option>
-                                        <option value = "Seleccionar Carrera" selected>Seleccionar Carrera</option>
+                                    <select class="form-select" name='carreras' id='carreraInterfaz' onClick={cargarMaterias} ref={refCarrera}>
+                                        <option value={-1}>Seleccione Carrera</option>
+                                        {
+                                            listaCarrera.map((item) => (
+                                                <option value={item.CODCARRERA}>{item.NOMBRECARRERA}</option>
+                                            )
+                                            )
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -268,11 +300,14 @@ export function Reserva() {
                                     <h4> Materia :</h4>
                                 </div>
                                 <div className='col-sm-8 mt-3'>
-                                    <select class="form-select" ref={refMateria} required id='MateriaInterfaz'>
-                                        <option value = "Taller de ingenieria de software" selected>Taller de ingenieria de software</option>
-                                        <option value = "Introduccion a la programacion" selected>Introduccion a la programacion</option>
-                                        <option value = "Ingenieria de software" selected>Ingenieria de software</option>
-                                        <option value = "Seleccionar Materia" selected>Seleccionar Materia</option>
+                                    <select class="form-select" name='materias' id='materiaInterfaz' ref={refMateria}>
+                                        <option value={-1}>Seleccione Materia</option>
+                                        {
+                                            listaMateria.map((item) => (
+                                                <option value={item.CODMATERIA}>{item.NOMBREMATERIA}</option>
+                                            )
+                                            )
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -289,7 +324,7 @@ export function Reserva() {
                                         type="number"
                                         min={1}
                                         max={5}
-                                        id = 'grupoInterfaz'
+                                        id='grupoInterfaz'
                                     />
                                 </div>
                             </div>
@@ -305,7 +340,7 @@ export function Reserva() {
                                         class="form-control"
                                         min={50}
                                         max={300}
-                                        id = 'estudiantesInterfaz'
+                                        id='estudiantesInterfaz'
                                     />
                                 </div>
                             </div>
@@ -314,12 +349,12 @@ export function Reserva() {
                                     <h4> Motivo :</h4>
                                 </div>
                                 <div className='col-sm-5 mt-3'>
-                                    <select class="form-select" ref={refMotivo} required id = 'motivoInterfaz'>
-                                        <option value = "Examen" selected>Examen</option>
-                                        <option value = "Laboratorio" selected>Laboratorio</option>
-                                        <option value = "Practica" selected>Practica</option>
-                                        <option value = "Revision" selected>Revision</option>
-                                        <option value = "Seleccionar" selected>Seleccionar Motivo</option>
+                                    <select class="form-select" ref={refMotivo} required id='motivoInterfaz'>
+                                        <option value="Examen" selected>Examen</option>
+                                        <option value="Laboratorio" selected>Laboratorio</option>
+                                        <option value="Practica" selected>Practica</option>
+                                        <option value="Revision" selected>Revision</option>
+                                        <option value="Seleccionar Motivo" selected>Seleccionar Motivo</option>
                                     </select>
                                 </div>
                             </div>
@@ -330,25 +365,32 @@ export function Reserva() {
                                         required
                                         class="form-control"
                                         ref={refFecha}
-                                        id = "fechaInterfaz"
+                                        id="fechaInterfaz"
                                     />
                                 </div>
                                 <div className='col-sm-4 mt-3'>
                                     <h4> Hora :</h4>
-                                    <input type="time"
-                                        required
-                                        ref={refHora}
-                                        class="form-control"
-                                        id = "horaInterfaz"
-                                    />
+                                    <select class="form-select" ref={refHora} required id="horaInterfaz">
+                                        <option value="06:45" selected>06:45</option>
+                                        <option value="08:15" selected>08:15</option>
+                                        <option value="09:45" selected>09:45</option>
+                                        <option value="11:15" selected>11:15</option>
+                                        <option value="12:45" selected>12:45</option>
+                                        <option value="14:15" selected>14:15</option>
+                                        <option value="15:45" selected>15:45</option>
+                                        <option value="17:15" selected>17:15</option>
+                                        <option value="18:45" selected>18:45</option>
+                                        <option value="20:15" selected>20:15</option>
+                                        <option value="Seleccionar Hora" selected>Seleccionar Hora</option>
+                                    </select>
                                 </div>
                                 <div className='col-sm-4 mt-3'>
                                     <h4> Periodo :</h4>
                                     <select class="form-select" ref={refPeriodo} required id='periodoInterfaz'>
-                                        <option value = "1 Periodo" selected>1 Periodo</option>
-                                        <option value = "2 Periodo" selected>2 Periodo</option>
-                                        <option value = "3 Periodo" selected>3 Periodo</option>
-                                        <option value = "Seleccionar Periodo" selected>Seleccionar Periodo</option>
+                                        <option value="1 Periodo" selected>1 Periodo</option>
+                                        <option value="2 Periodo" selected>2 Periodo</option>
+                                        <option value="3 Periodo" selected>3 Periodo</option>
+                                        <option value="Seleccionar Periodo" selected>Seleccionar Periodo</option>
                                     </select>
                                 </div>
                             </div>
@@ -357,12 +399,12 @@ export function Reserva() {
                                 <Toaster
                                     position="top-center"
                                     reverseOrder={false}
-                                /></div>
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div >
-
         </div >
     )
 }

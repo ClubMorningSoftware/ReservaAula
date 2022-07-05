@@ -1,14 +1,14 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import '../assets/css/App.css'
 import { useHistory } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast'
+import axios from 'axios'
 
 export function Inicio() {
 
     const historial = useHistory();
     const refUsuario = useRef(null);
     const refContraseña = useRef(null);
-
     const Registrarse = () => {
         historial.push('/registro')
     }
@@ -18,32 +18,56 @@ export function Inicio() {
         var contraseña = refContraseña.current.value;
         if (usuario != "") {
             if (contraseña != "") {
-                if (usuario == "201801656") {
-                    if (contraseña == "123456") {
-                        document.title = usuario;
-                        console.log("Se Inicio Sesion Correctamente");
-                        toast.success('INICIO DE SESION CORRECTAMENTE', { position: 'top-center' })
-                        historial.push('/reserva');
-                    } else {
-                        console.log("Contraseña incorrecta");
-                        toast.error("CONTRASEÑA INCORRECTA", { position: "top-center" })
-                    }
-                } else {
-                    if (usuario == "123456") {
-                        if (contraseña == "123456") {
-                            document.title = usuario;
-                            console.log("Se Inicio Sesion Correctamente");
-                            toast.success('INICIO DE SESION CORRECTAMENTE', { position: 'top-center' })
-                            historial.push('/administrador');
-                        } else {
-                            console.log("Contraseña No Introducida");
-                            toast.error("INTRODUCIR CONTRASEÑA", { position: "top-center" })
+                axios.get('http://cms.tis.cs.umss.edu.bo/docenteEspecifico/' + usuario).then(response => {
+                    var datos = response.data
+                    if (datos.length == 1) {
+                        var nombreBd = datos[0].NOMBREDOCENTE
+                        var usuarioBd = datos[0].NOMBREUSUARIO
+                        var contraseñaBd = datos[0].CONTRASENADOCENTE
+                        if (usuarioBd == usuario) {
+                            if (contraseñaBd == contraseña) {
+                                document.title = nombreBd
+                                console.log("Se Inicio Sesion Correctamente");
+                                toast.success('INICIO DE SESION CORRECTAMENTE', { position: 'top-center' })
+                                historial.push('/reserva');
+                            } else {
+                                console.log("Contraseña incorrecta");
+                                toast.error("CONTRASEÑA INCORRECTA", { position: "top-center" })
+                            }
+                        }else{
+                            console.log("No Existe Usuario");
+                                    toast.error("CUENTA NO REGISTRADA", { position: "top-center" })
                         }
                     } else {
-                        console.log("No Existe Usuario");
-                        toast.error("CUENTA NO REGISTRADA", { position: "top-center" })
+                        axios.get('http://cms.tis.cs.umss.edu.bo/administradorEspecifico/' + usuario).then(response => {
+                            var datosAdmi = response.data
+                            console.log(datosAdmi)
+                            if (datosAdmi.length == 1) {
+                                var nombreBd = datosAdmi[0].NOMBREADMINISTRADOR
+                                var usuarioBd = datosAdmi[0].USUARIOADMINISTRADOR
+                                var contraseñaBd = datosAdmi[0].CONTRASENAADMINISTRADOR
+                                if (usuarioBd == usuario) {
+                                    if (contraseñaBd == contraseña) {
+                                        document.title = nombreBd
+                                        console.log("Se Inicio Sesion Correctamente");
+                                        toast.success('INICIO DE SESION CORRECTAMENTE', { position: 'top-center' })
+                                        historial.push('/administrador');
+                                    } else {
+                                        console.log("Contraseña incorrecta");
+                                        toast.error("CONTRASEÑA INCORRECTA", { position: "top-center" })
+                                    }
+                                } else {
+                                    console.log("No Existe Usuario");
+                                    toast.error("CUENTA NO REGISTRADA", { position: "top-center" })
+                                }
+                            } else {
+                                console.log("No Existe Usuario");
+                                toast.error("CUENTA NO REGISTRADA", { position: "top-center" })
+                            }
+                        });
                     }
-                }
+                })
+
             } else {
                 console.log("Contraseña No Introducida");
                 toast.error("INTRODUCIR CONTRASEÑA", { position: "top-center" })
@@ -53,7 +77,7 @@ export function Inicio() {
             toast.error("INTRODUCIR NOMBRE DE USUARIO", { position: "top-center" })
         }
     }
-    
+
     return (
         <div className='encabezado'>
             <div className="row">
@@ -87,7 +111,7 @@ export function Inicio() {
                                     className="form-control"
                                     placeholder="Contraseña"
                                     aria-label="Contraseña"
-                                    aria-describedby="basic-addon1"
+                                    aria-describedby="basic-addon2"
                                     ref={refContraseña}
                                 />
                             </div>
